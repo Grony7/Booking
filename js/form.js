@@ -1,7 +1,6 @@
 import {showErrorMessage, showSuccessMessage} from './util.js';
-import {STARTING_POSITION, returnMapPoints} from './map.js';
+import {resetMap} from './map.js';
 import {resetPriceSlider} from './slider.js';
-import {addAddress} from './form-states.js';
 import {renderPhotos, resetPhotos} from './photos.js';
 import {sendData} from './api.js';
 
@@ -27,12 +26,10 @@ const MinPriceList = {
 // Перезагрузка формы
 
 const resetForm = () => {
-  resetPriceSlider();
   adForm.reset();
   resetPhotos();
   resetPriceSlider();
-  addAddress(STARTING_POSITION);
-  returnMapPoints(STARTING_POSITION);
+  resetMap();
 };
 
 // Наличие данных

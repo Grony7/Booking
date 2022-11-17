@@ -12,15 +12,19 @@ const map = L.map('map-canvas')
   .on('load', () => {
     activateAdFormField();
   });
-
 const markerGroup = L.layerGroup().addTo(map);
-
 addAddress(STARTING_POSITION);
 
 const mainPinIcon = L.icon({
   iconUrl: './img/main-pin.svg',
   iconSize: [52, 52],
   iconAnchor: [26, 52],
+});
+
+const icon = L.icon({
+  iconUrl: './img/pin.svg',
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
 });
 
 const mainMarker = L.marker(
@@ -34,12 +38,6 @@ const mainMarker = L.marker(
 mainMarker.on('moveend', (evt) => {
   const coordinates = evt.target.getLatLng();
   addAddress(coordinates);
-});
-
-const icon = L.icon({
-  iconUrl: './img/pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
 });
 
 const renderMap = () => {
@@ -81,5 +79,10 @@ const setAdPoints = (points) => {
 
 const returnMapPoints = (coordinates) => mainMarker.setLatLng(coordinates);
 
-export {renderMap, setAdPoints, STARTING_POSITION, returnMapPoints};
+const resetMap = () => {
+  addAddress(STARTING_POSITION);
+  returnMapPoints(STARTING_POSITION);
+};
+
+export {renderMap, setAdPoints, returnMapPoints, resetMap};
 
